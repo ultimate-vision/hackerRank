@@ -1,0 +1,56 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // Complete the funnyString function below.
+    static String funnyString(String s) {
+        String ss=s;
+        String rr="";
+       
+        for (int i=0;i<ss.length();i++){
+            rr=rr+Character.toString(ss.charAt(ss.length()-1-i));
+        }
+        if(Arrays.equals(adjCheck(ss),adjCheck(rr)))
+            return"Funny";
+            else
+            return"Not Funny";
+      
+       
+    }
+    static int [] adjCheck(String s){
+        String ss=s;
+        int [] values= new int[ss.length()-1];
+        for (int i=0;i<ss.length()-1;i++){
+            values[i]=Math.abs((int)ss.charAt(i)-(int)ss.charAt(i+1));
+        }
+        return values;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        int q = scanner.nextInt();
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int qItr = 0; qItr < q; qItr++) {
+            String s = scanner.nextLine();
+
+            String result = funnyString(s);
+
+            bufferedWriter.write(result);
+            bufferedWriter.newLine();
+        }
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
